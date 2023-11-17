@@ -1,28 +1,79 @@
 const router = require("express").Router();
-const userModel = require("./user");
-const postModel = require("./post");
-const user = require("./user");
+const userModel = require("./users");
+const postModel = require("./posts");
+const user = require("./users");
+const passport = require("passport");
+const localStrategy = require("passport-local");
+isLoggedIn = (req, res, next) => {
+  if (req.isAuthenticated()) return next();
+  res.redirect("/");
+};
+passport.authenticate(new localStrategy(userModel.authenticate()));
 
 router.get("/", (req, res, next) => {
   res.render("index");
 });
-
-router.get("/createuser", async (req, res, next) => {
-  const createdUser = await userModel.create({
-    username: "Diwas",
-    email: "diwaskarki96@gmail.com",
-    password: "diwas",
-    fullName: "Diwash Karki",
-    posts: [],
-  });
-  res.send(createdUser);
+router.get("/profile", isLoggedIn, (req, res, next) => {
+  res.send("Profile");
 });
 
-router.get("/createpost", async (req, res, next) => {
-  let createdPost = await postModel.create({
-    postText: "Hello createdpost",
+router.post("/register", (req, res) => {
+  const userData = new userModel({
+    username: req.body.username,
+    email: req.body.email,
+
+    fullName: req.body.fullName,
   });
-  res.send(createdPost);
+  userModel.register(userData, req.body.password).then(() => {
+    passport.authenticate("local")(req, res, () => {
+      res.redirect("/profile");
+    });
+  });
 });
 
+router.post(
+  "/login",
+  passport.authenticate("local", {
+    successRedirect: "/profile",
+    failureRedirect: "/",
+  }),
+  (req, res) => {}
+);
+
+router.get("/logout", (req, res) => {
+  req.logout((err) => {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("/");
+  });
+});
+
+// router.get("/createuser", async (req, res, next) => {
+//   let createdUser = await userModel.create({
+//     username: "Diwas",
+//     email: "diwaskarki96@gmail.com",
+//     password: "diwas",
+//     fullName: "Diwash Karki",
+//     posts: [],
+//   });
+//   res.send(createdUser);
+// });
+
+// router.get("/createpost", async (req, res, next) => {
+//   let createdPost = await postModel.create({
+//     postText: "Hello another post",
+//     user: "65571347e40c0bd0861c7687",
+//   });
+//   let user = await userModel.findOne({ _id: "65571347e40c0bd0861c7687" });
+//   user.posts.push(createdPost._id);
+//   await user.save();
+//   res.send("done");
+// });
+// router.get("/alluserposts", async (req, res) => {
+//   let userPosts = await userModel
+//     .findOne({ _id: "65571347e40c0bd0861c7687" })
+//     .populate("posts");
+//   res.send(userPosts);
+// });
 module.exports = router;
