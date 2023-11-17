@@ -8,7 +8,7 @@ isLoggedIn = (req, res, next) => {
   if (req.isAuthenticated()) return next();
   res.redirect("/");
 };
-passport.authenticate(new localStrategy(userModel.authenticate()));
+passport.use(new localStrategy(userModel.authenticate()));
 
 router.get("/", (req, res, next) => {
   res.render("index");
@@ -18,17 +18,21 @@ router.get("/profile", isLoggedIn, (req, res, next) => {
 });
 
 router.post("/register", (req, res) => {
-  const userData = new userModel({
-    username: req.body.username,
-    email: req.body.email,
-
-    fullName: req.body.fullName,
-  });
-  userModel.register(userData, req.body.password).then(() => {
-    passport.authenticate("local")(req, res, () => {
-      res.redirect("/profile");
+  try {
+    const userData = new userModel({
+      username: req.body.username,
+      email: req.body.email,
+      fullName: req.body.fullName,
     });
-  });
+    userModel.register(userData, req.body.password).then(() => {
+      passport.authenticate("local")(req, res, () => {
+        res.redirect("/profile");
+      });
+    });
+  } catch (error) {
+    console.error("error ", error.message);
+    res.status(500).send("Internal Server Error");
+  }
 });
 
 router.post(
