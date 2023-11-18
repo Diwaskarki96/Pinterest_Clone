@@ -4,6 +4,7 @@ const postModel = require("./posts");
 const user = require("./users");
 const passport = require("passport");
 const localStrategy = require("passport-local");
+
 isLoggedIn = (req, res, next) => {
   if (req.isAuthenticated()) return next();
   res.redirect("/");
@@ -17,14 +18,14 @@ router.get("/profile", isLoggedIn, (req, res, next) => {
   res.send("Profile");
 });
 
-router.post("/register", (req, res) => {
+router.post("/register", async (req, res) => {
   try {
     const userData = new userModel({
       username: req.body.username,
       email: req.body.email,
-      fullName: req.body.fullName,
+      fullname: req.body.fullname,
     });
-    userModel.register(userData, req.body.password).then(() => {
+    await userModel.register(userData, req.body.password).then(() => {
       passport.authenticate("local")(req, res, () => {
         res.redirect("/profile");
       });

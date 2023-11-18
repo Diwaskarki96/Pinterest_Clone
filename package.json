@@ -17,6 +17,7 @@
     "nodemon": "^3.0.1"
   },
   "dependencies": {
+    "body-parser": "^1.20.2",
     "ejs": "^3.1.9",
     "express-session": "^1.17.3",
     "passport": "^0.6.0",
