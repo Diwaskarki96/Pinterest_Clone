@@ -14,8 +14,15 @@ passport.use(new localStrategy(userModel.authenticate()));
 router.get("/", (req, res, next) => {
   res.render("index");
 });
+router.get("/login", (req, res, next) => {
+  res.render("login");
+});
+router.get("/feed", (req, res, next) => {
+  res.render("feed");
+});
+
 router.get("/profile", isLoggedIn, (req, res, next) => {
-  res.send("Profile");
+  res.render("Profile");
 });
 
 router.post("/register", async (req, res) => {
