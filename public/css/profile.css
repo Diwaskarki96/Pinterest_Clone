@@ -6,7 +6,7 @@
   }
   
   body {
-    height: 100vh;
+    height: 1ovh;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -16,8 +16,8 @@
   }
   
   .box {
-    min-height: 380px;
-    width: 350px;
+    min-height: 300px;
+    width: 2000px;
     border-radius: 10px;
     box-shadow: -3px -3px 7px #ffffff, 3px 3px 5px #ceced1;
     display: flex;
@@ -75,75 +75,8 @@
     justify-content: space-between;
   }
   
-  .fb,
-  .insta,
-  .twitt,
-  .uTube {
-    height: 40px;
-    width: 40px;
-    border-radius: 50%;
-    box-shadow: -3px -3px 7px #ffffff, 3px 3px 5px #ceced1;
-    cursor: pointer;
-  }
+ .container{
   
-  .btns {
-    padding: 30px;
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    align-items: center;
-    height: 80px;
-    width: 100%;
-  }
-  
-  .btns button {
-    background: none;
-    border: none;
-    outline: none;
-    height: 35px;
-    width: 100%;
-    border-radius: 4px;
-    box-shadow: -3px -3px 7px #ffffff, 3px 3px 5px #ceced1;
-    cursor: pointer;
-  }
-  
-  .btns button:hover {
-    background: none;
-    border: none;
-    background: #ecf0f3;
-    outline: none;
-    height: 35px;
-    width: 100%;
-    border-radius: 4px;
-    box-shadow: inset -2px -2px 3px #ffffff, inset 2px 2px 3px #ceced1;
-  }
-  
-  .extra-stats {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    text-align: center;
-    width: 100%;
-    padding: 0px 25px;
-    margin-top: 15px;
-  }
-  
-  .fb,
-  .insta,
-  .uTube,
-  .twitt {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .fb:hover,
-  .insta:hover,
-  .uTube:hover,
-  .twitt:hover {
-    height: 40px;
-    width: 40px;
-    border-radius: 50%;
-    box-shadow: inset -2px -2px 3px #ffffff, inset 2px 2px 3px #ceced1;
-  }
+  margin-top: 0px;
+ }
   

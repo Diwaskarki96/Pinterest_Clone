@@ -1,8 +1,7 @@
 const mongoose = require("mongoose");
+const DB_URL = process.env.DB_URL;
 const plm = require("passport-local-mongoose");
-mongoose
-  .connect("mongodb://127.0.0.1:27017/Pinterest")
-  .then(console.log("Database is connected"));
+mongoose.connect(DB_URL).then(console.log("Database is connected"));
 const userSchema = new mongoose.Schema({
   username: {
     type: String,
