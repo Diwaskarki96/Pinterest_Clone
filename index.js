@@ -8,12 +8,15 @@ const usersRouter = require("./routes/users");
 const expressSession = require("express-session");
 const passport = require("passport");
 const bodyParser = require("body-parser");
+const flash = require("connect-flash");
+
 const app = express();
 
 app.set("view engine", "ejs");
 app.use(express.static("./public"));
 app.use(bodyParser.urlencoded({ extended: false }));
 
+app.use(flash());
 app.use(
   expressSession({
     resave: false,
