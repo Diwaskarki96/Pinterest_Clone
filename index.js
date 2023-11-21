@@ -30,6 +30,17 @@ passport.serializeUser(usersRouter.serializeUser());
 passport.deserializeUser(usersRouter.deserializeUser());
 
 app.use("/", indexRouter);
+app.get("/error", (req, res) => {
+  res.render("error");
+});
+app.use(function errorHandler(err, req, res, next) {
+  if (res.headersSent) {
+    return next(err);
+  }
+  res.status(500);
+  res.render("error", { error: err });
+});
+
 app.listen(PORT, (req, res) => {
   console.log(`Server is running at port:${PORT}`);
 });
