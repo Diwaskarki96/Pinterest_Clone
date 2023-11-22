@@ -1,7 +1,7 @@
 {
   "name": "pinterest_clone",
   "version": "1.0.0",
-  "description": "",
+  "description": "Pinterest Clone using Node, MongoDB and Express.",
   "main": "index.js",
   "scripts": {
     "start": "nodemon .",
