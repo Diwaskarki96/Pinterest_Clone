@@ -1,2 +1,2 @@
-# Pinterest_Clone
+Pinterest Clone using Node, MongoDB and Express.
 
