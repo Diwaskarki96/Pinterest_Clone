@@ -4,6 +4,7 @@ const postModel = require("./posts");
 const user = require("./users");
 const passport = require("passport");
 const localStrategy = require("passport-local");
+const upload = require("./multer");
 
 isLoggedIn = (req, res, next) => {
   if (req.isAuthenticated()) return next();
@@ -20,6 +21,24 @@ router.get("/login", (req, res, next) => {
 router.get("/feed", (req, res, next) => {
   res.render("feed");
 });
+router.post(
+  "/upload",
+  isLoggedIn,
+  upload.single("file"),
+  async (req, res, next) => {
+    if (!req.file) {
+      return res.send(404).send(error.msg, "No files were uploaded");
+    }
+    const user = await userModel.findOne({
+      username: req.session.passport.user,
+    });
+    const postData = await postModel.create({
+      image: req.file.filename,
+      imageText: req.body.filecaptiom,
+      user: user._id,
+    });
+  }
+);
 
 router.get("/profile", isLoggedIn, async (req, res, next) => {
   const user = await userModel.findOne({
