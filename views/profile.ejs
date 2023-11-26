@@ -38,10 +38,10 @@
       </div>
     </div>
     <div class="container">
-      <div class="cards">
+      <div class="cards flex">
         <% user.posts.forEach(function(post) { %>
         <div class="card" style="width: 18rem">
-          <% if (post.image) { %>
+          <% if (post.image !== undefined && post.image !== '') { %>
           <img
             src="/img/uploads/<%= post.image %>"
             class="card-img-top"
@@ -52,7 +52,7 @@
           <p>No image available</p>
           <% } %>
           <div class="card-body">
-            <h5 class="card-title">All Designs</h5>
+            <h5 class="card-title"><%= post.imageText %></h5>
           </div>
         </div>
         <% }) %>
