@@ -37,13 +37,19 @@ router.post(
       imageText: req.body.filecaptiom,
       user: user._id,
     });
+    user.posts.push(postData._id);
+    await user.save();
+    res.redirect("/profile");
   }
 );
 
 router.get("/profile", isLoggedIn, async (req, res, next) => {
-  const user = await userModel.findOne({
-    username: req.session.passport.user,
-  });
+  const user = await userModel
+    .findOne({
+      username: req.session.passport.user,
+    })
+    .populate("posts");
+
   res.render("Profile", { user });
 });
 
@@ -85,31 +91,4 @@ router.get("/logout", (req, res) => {
   });
 });
 
-// router.get("/createuser", async (req, res, next) => {
-//   let createdUser = await userModel.create({
-//     username: "Diwas",
-//     email: "diwaskarki96@gmail.com",
-//     password: "diwas",
-//     fullName: "Diwash Karki",
-//     posts: [],
-//   });
-//   res.send(createdUser);
-// });
-
-// router.get("/createpost", async (req, res, next) => {
-//   let createdPost = await postModel.create({
-//     postText: "Hello another post",
-//     user: "65571347e40c0bd0861c7687",
-//   });
-//   let user = await userModel.findOne({ _id: "65571347e40c0bd0861c7687" });
-//   user.posts.push(createdPost._id);
-//   await user.save();
-//   res.send("done");
-// });
-// router.get("/alluserposts", async (req, res) => {
-//   let userPosts = await userModel
-//     .findOne({ _id: "65571347e40c0bd0861c7687" })
-//     .populate("posts");
-//   res.send(userPosts);
-// });
 module.exports = router;

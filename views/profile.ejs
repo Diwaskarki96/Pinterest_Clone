@@ -31,22 +31,28 @@
         </p>
         <a href="/logout" class="button">Logout</a>
         <form action="/upload" method="post" enctype="multipart/form-data">
-          <input type="text" name="filecaption" placeholder="some caption" />
+          <input type="text" name="filecaption" placeholder="Write caption" />
           <input type="file" name="file" />
           <button type="submit">Upload</button>
         </form>
       </div>
     </div>
     <div class="container">
-      <div class="card" style="width: 18rem">
-        <img
-          src="https://imgs.search.brave.com/T0AsYXfmw0P-q2Eav1nHltZS_Bd79xL_9bDUwMSE2tc/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9jb21p/Y3ZpbmUuZ2FtZXNw/b3QuY29tL2EvdXBs/b2Fkcy9vcmlnaW5h/bC80LzQzNTkzLzkw/MjU1MS1ibGVhY2hf/YWl6ZW4wMDI4Lmpw/Zw"
-          class="card-img-top"
-          alt="..."
-        />
-        <div class="card-body">
-          <h5 class="card-title">All Designs</h5>
+      <div class="cards">
+        <% user.posts.forEach(function(post) { %>
+
+        <div class="card" style="width: 18rem">
+          <img
+            src="/img/uploads/<%= post.image %>"
+            class="card-img-top"
+            alt="<%= post.image %>"
+          />
+
+          <div class="card-body">
+            <h5 class="card-title"><%= post.imageText %></h5>
+          </div>
         </div>
+        <% }) %>
       </div>
     </div>
     <script
