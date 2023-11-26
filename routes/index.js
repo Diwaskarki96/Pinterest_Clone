@@ -34,7 +34,7 @@ router.post(
     });
     const postData = await postModel.create({
       image: req.file.filename,
-      imageText: req.body.filecaptiom,
+      imageText: req.body.filecaption,
       user: user._id,
     });
     user.posts.push(postData._id);
