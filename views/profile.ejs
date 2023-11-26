@@ -40,21 +40,25 @@
     <div class="container">
       <div class="cards">
         <% user.posts.forEach(function(post) { %>
-
         <div class="card" style="width: 18rem">
+          <% if (post.image) { %>
           <img
             src="/img/uploads/<%= post.image %>"
             class="card-img-top"
             alt="<%= post.image %>"
           />
-
+          <% } else { %>
+          <!-- Handle the case when post.image is empty or undefined -->
+          <p>No image available</p>
+          <% } %>
           <div class="card-body">
-            <h5 class="card-title"><%= post.imageText %></h5>
+            <h5 class="card-title">All Designs</h5>
           </div>
         </div>
         <% }) %>
       </div>
     </div>
+
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
