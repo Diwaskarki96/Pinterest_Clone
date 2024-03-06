@@ -14,7 +14,7 @@ Users have the ability to create and share posts. This feature allows users to e
 
 A central feed page displays all posts from users. This feature provides a platform for users to explore, discover, and interact with content posted by others.
 
-# credit:
+# Credit:
 
 Frontend code in this project was taken from CodePen. You can find the original code at: https://codepen.io/
 
