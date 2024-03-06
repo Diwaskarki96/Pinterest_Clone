@@ -130,4 +130,5 @@ dist
 .pnp.*
 
 multer.png
-public
+
+/public/img/uploads
