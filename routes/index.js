@@ -18,9 +18,7 @@ router.get("/", (req, res, next) => {
 router.get("/login", (req, res, next) => {
   res.render("login", { error: req.flash("error") });
 });
-router.get("/feed", (req, res, next) => {
-  res.render("feed");
-});
+
 router.post(
   "/upload",
   isLoggedIn,
@@ -81,6 +79,12 @@ router.post(
   }),
   (req, res) => {}
 );
+
+router.get("/feed", isLoggedIn, async (req, res, next) => {
+  const user = await userModel.findOne({ username: req.session.passport.user });
+  const posts = await postModel.find().populate("user");
+  res.render("feed", { posts, user });
+});
 
 router.get("/logout", (req, res) => {
   req.logout((err) => {
