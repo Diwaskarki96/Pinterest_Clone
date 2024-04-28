@@ -2,15 +2,15 @@
 
 The Pinterest Clone is a dynamic web application that replicates key features of the popular social media platform, Pinterest. The primary features of this project include: While the project is still under development, the primary features of this project include:
 
-#User Authentication:
+#**User Authentication**:
 
 This feature ensures that users can securely register and log in to their accounts. It provides the foundation for personalized user experiences.
 
-#Posting Capability:
+#**Posting Capability**:
 
 Users have the ability to create and share posts. This feature allows users to express their interests and ideas visually, similar to pinning on a board.
 
-#Feed Page:
+#**Feed Page**:
 
 A central feed page displays all posts from users. This feature provides a platform for users to explore, discover, and interact with content posted by others.
 
